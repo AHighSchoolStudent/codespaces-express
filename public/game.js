@@ -1,6 +1,7 @@
 let parms = {
     cotton: 0,
-    cottonClick: 1
+    cottonClick: 1,
+    slaves: 0
 }
   
 function addResource(resource, amount) {
@@ -12,12 +13,32 @@ function displayChange(id, parm) {
     document.getElementById(id).innerText = parm;
 }
 
+function autoClickCotton() {
+    if (parms.slaves > 0) {
+        setInterval(() => {
+            addResource('cotton', parms.slaves * parms.cottonClick);
+        }, 1000);
+    }
+}
+
 const moralPrompts = [
     {
         prompt: "You come across native land, people live here. Tear it down to be a cotton field the yield could be massive.",
         resource: "cotton",
         cost: "This will force the natives out.",
         rewardRange: [2, 100]
+    },
+    {
+        prompt: "You acquire land, you can build a plantation here or save it.",
+        resource: "slaves",
+        cost: "You will have slaves",
+        rewardRange: [1, 15]
+    },
+    {
+        prompt: "Would you like to research cross pollinating, for your cotton fields?",
+        resource: "cotton",
+        cost: "It will very slightly boost your cotton.",
+        rewardRange: [1, 5]
     }
 ]
 
@@ -32,6 +53,10 @@ function showPopup() {
     document.getElementById('yesBtn').onclick = function () {
         const randomAmount = Math.floor(Math.random() * (randomPrompt.rewardRange[1] - randomPrompt.rewardRange[0] + 1)) + randomPrompt.rewardRange[0];
         addResource(randomPrompt.resource, randomAmount);
+
+        if (randomPrompt.resource === 'slaves') {
+            autoClickCotton();
+        }
 
         popup.style.display = 'none';
         scheduleNextPopup();
