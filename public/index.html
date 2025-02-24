@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <title>Ethical Clicker</title>
+  </head>
+  <body>
+    <div class="popup">
+        <b>Morally Ethic Question</b><hr>
+        <p id="popupMessage">Popup Info</p>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <b>Resources:</b><br>
+    <ul>
+        <li>Cotton: <span id="cotton">0</span></li>
+    </ul>
+
+    <button onclick="addResource('cotton', parms.cottonClick)">Pick Cotton</button>
+
+    <div>
+        <p>Next event in: <span id="timer">00:00</span></p>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
